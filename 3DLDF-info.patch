@@ -12,15 +12,3 @@
  @end direntry
  
  
---- 3DLDF-1.1.4/DOC/TEXINFO/using.texi.orig	1970-01-01 01:00:00.000000000 +0100
-+++ 3DLDF-1.1.4/DOC/TEXINFO/using.texi	2003-12-30 20:07:02.829830520 +0100
-@@ -0,0 +1,9 @@
-+@node    Using 3DLDF, Points, Contributing to 3DLDF, Top
-+@section Using 3DLDF
-+
-+Since 3DLDF does not yet have an input routine, user code must be
-+written in C++  (in `main.web', or some other file) and compiled.
-+Then, 3DLDF must be relinked, together with the new file of object code
-+resulting from the compilation.  For now, the important point is that
-+the text of the examples in this manual represent C++  code.
-+@xref{Installing and Running 3DLDF}, for more information.
