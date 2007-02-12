@@ -1,5 +1,5 @@
 Summary:	Three-dimensional drawing with MetaPost output
-Summary(pl.UTF-8):   Tworzenie trójwymiarowej grafiki z wyjściem w formacie MetaPost
+Summary(pl.UTF-8):	Tworzenie trójwymiarowej grafiki z wyjściem w formacie MetaPost
 Name:		3DLDF
 Version:	1.1.5.1
 Release:	1
