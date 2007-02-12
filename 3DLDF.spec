@@ -1,5 +1,5 @@
 Summary:	Three-dimensional drawing with MetaPost output
-Summary(pl):	Tworzenie trójwymiarowej grafiki z wyj¶ciem w formacie MetaPost
+Summary(pl.UTF-8):   Tworzenie trÃ³jwymiarowej grafiki z wyjÅ›ciem w formacie MetaPost
 Name:		3DLDF
 Version:	1.1.5.1
 Release:	1
@@ -19,10 +19,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 It is intended, among other things, to provide a convenient way of
 creating 3D graphics for inclusion in TeX documents.
  
-%description -l pl
-3DLF to pakiet do tworzenia trójwymiarowej grafiki z wyj¶ciem w
-formacie MetaPost. Ma on s³u¿yæ miêdzy innymi do udostêpnienia
-wygodnego sposobu tworzenia grafiki 3D w celu w³±czenia do dokumentów
+%description -l pl.UTF-8
+3DLF to pakiet do tworzenia trÃ³jwymiarowej grafiki z wyjÅ›ciem w
+formacie MetaPost. Ma on sÅ‚uÅ¼yÄ‡ miÄ™dzy innymi do udostÄ™pnienia
+wygodnego sposobu tworzenia grafiki 3D w celu wÅ‚Ä…czenia do dokumentÃ³w
 w TeXu.
 
 %prep
