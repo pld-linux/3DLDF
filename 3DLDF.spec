@@ -5,7 +5,7 @@ Version:	1.1.5.1
 Release:	1
 License:	GPL v2+
 Group:		Applications/Graphics
-Source0:	ftp://ftp.gnu.org/gnu/3dldf/%{name}-%{version}.tar.gz
+Source0:	http://ftp.gnu.org/gnu/3dldf/%{name}-%{version}.tar.gz
 # Source0-md5:	abe73cec9db802c039c2399b87e2528b
 Patch0:		%{name}-info.patch
 URL:		http://wwwuser.gwdg.de/~lfinsto1/
