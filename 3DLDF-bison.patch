@@ -1,0 +1,123 @@
+#--- 3DLDF-2.0.2/src/parser2.y++.orig	2013-11-21 18:40:43.899832522 +0100
+#+++ 3DLDF-2.0.2/src/parser2.y++	2013-11-22 15:44:21.813317413 +0100
+#@@ -50,7 +50,7 @@
+# 
+# 
+# int
+#-zzlex(YYSTYPE*lvalp,yyscan_t parameter);
+#+zzlex(YYSTYPE*lvalp,void*parameter);
+# 
+# int
+# zzwrap(void);
+#@@ -68,8 +68,8 @@
+# 
+# %verbose
+# %pure-parser
+#-%parse-param {yyscan_t parameter}
+#-%lex-param {yyscan_t parameter}
+#+%parse-param {void* parameter}
+#+%lex-param {void* parameter}
+# %name-prefix="zz"
+# %debug
+# 
+#--- 3DLDF-2.0.2/src/parser.y++.orig	2013-11-21 18:27:27.506532611 +0100
+#+++ 3DLDF-2.0.2/src/parser.y++	2013-11-22 16:12:15.819913829 +0100
+#@@ -118,8 +118,6 @@
+# 
+# 
+# 
+#-#define YYPARSE_PARAM parameter
+#-#define YYLEX_PARAM parameter
+# #define YYLTYPE LDF_LOCATION_TYPE
+# #define YYLOC_DEFAULT(Current, Rhs, N) 
+# 
+#@@ -170,7 +168,9 @@
+# 
+# %locations
+# 
+#-%pure_parser
+#+%pure-parser
+#+%parse-param { void* parameter }
+#+%lex-param { void* parameter }
+# /* %token_table */
+# %verbose
+# 
+#@@ -5520,7 +5520,7 @@
+# 
+# 
+# int
+#-yyerror(char const*message);
+#+yyerror(YYLTYPE *, void *, char const*message);
+# 
+# 
+# 
+#@@ -88615,7 +88615,7 @@
+# 
+# 
+# int
+#-yyerror(char const*message)
+#+yyerror(YYLTYPE *, void *, char const*message)
+# {
+# cerr<<"ERROR! In yyparse(): "<<message<<endl<<flush;
+# return 0;
+--- 3DLDF-2.0.2/src/pbsndecl.w.orig	2013-11-07 14:36:06.000000000 +0100
++++ 3DLDF-2.0.2/src/pbsndecl.w	2013-11-22 16:50:55.063149831 +0100
+@@ -202,8 +202,6 @@
+ 
+ @<Preprocessor macros not only for the parser@>=
+ 
+-#define YYPARSE_PARAM parameter
+-#define YYLEX_PARAM parameter
+ #define YYLTYPE LDF_LOCATION_TYPE
+ #define YYLOC_DEFAULT(Current, Rhs, N) /* Do nothing.  */
+ 
+@@ -257,7 +255,9 @@
+ @q =%expect 1@>@/
+ @=%locations@>@/
+ @q =%glr-parser@>@/
+-@=%pure_parser@>@/
++@=%pure-parser@>@/
++@=%parse-param { void* parameter }@>@/
++@=%lex-param { void* parameter }@>@/
+ @=/* %token_table */@>@/ 
+ @=%verbose@>
+ 
+--- 3DLDF-2.0.2/src/pfuncfin.w.orig	2013-11-07 14:36:05.000000000 +0100
++++ 3DLDF-2.0.2/src/pfuncfin.w	2013-11-22 16:52:09.186480056 +0100
+@@ -82,12 +82,12 @@
+ @ {\it yyerror\/}().
+ @<Declare functions@>=
+ int
+-yyerror(char const* message);@/
++yyerror(YYLTYPE*, void*, char const* message);@/
+ 
+ @
+ @<Define functions@>=
+ int
+-yyerror(char const* message)
++yyerror(YYLTYPE*, void*, char const* message)
+ {
+   cerr << "ERROR! In yyparse(): " << message << endl << flush;
+   return 0;
+--- 3DLDF-2.0.2/src/parser2.web.orig	2013-08-11 19:36:46.000000000 +0200
++++ 3DLDF-2.0.2/src/parser2.web	2013-11-22 16:53:09.503144191 +0100
+@@ -49,7 +49,7 @@
+ @<Declarations of additional functions@>=
+ 
+ int 
+-zzlex(YYSTYPE* lvalp, yyscan_t parameter);
++zzlex(YYSTYPE* lvalp, void* parameter);
+ 
+ int
+ zzwrap(void);
+@@ -63,8 +63,8 @@
+ @<Options@>=
+ @=%verbose@>@;@/
+ @=%pure-parser@>@;@/
+-@=%parse-param {yyscan_t parameter}@>@;@/
+-@=%lex-param {yyscan_t parameter}@>@;@/
++@=%parse-param {void* parameter}@>@;@/
++@=%lex-param {void* parameter}@>@;@/
+ @=%name-prefix="zz"@>@;@/
+ @=%debug@>
+ 

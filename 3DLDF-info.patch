@@ -1,6 +1,20 @@
---- 3DLDF-1.1.4/DOC/TEXINFO/3DLDF.texi.orig	2003-12-10 18:05:14.000000000 +0100
-+++ 3DLDF-1.1.4/DOC/TEXINFO/3DLDF.texi	2003-12-30 19:41:42.428966584 +0100
-@@ -366,9 +366,9 @@
+--- 3DLDF-2.0.2/doc/3dldf.texi.orig	2013-11-11 17:51:27.672881852 +0100
++++ 3DLDF-2.0.2/doc/3dldf.texi	2013-11-11 18:02:17.612854576 +0100
+@@ -52,9 +52,9 @@
+ 
+ @c *********************
+ 
+-@dircategory non-GNU packages
++@dircategory Graphics Utilities:
+ @direntry
+-* 3DLDF: (3DLDF).  3DLDF Three-Dimensional Drawing Package
++* 3DLDF: (3dldf).			3DLDF Three-Dimensional Drawing Package
+ @end direntry
+ 
+ @c *********************
+--- 3DLDF-2.0.2/doc/old_doc/3DLDF.texi.orig	2013-11-04 18:22:08.000000000 +0100
++++ 3DLDF-2.0.2/doc/old_doc/3DLDF.texi	2013-11-22 19:32:04.326077385 +0100
+@@ -354,9 +354,9 @@
  @c Added @dircategory and @direntry at the suggestion of 
  @c Andreas Voegele.  LDF 2003.12.01.
  

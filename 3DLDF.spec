@@ -1,17 +1,24 @@
 Summary:	Three-dimensional drawing with MetaPost output
 Summary(pl.UTF-8):	Tworzenie trójwymiarowej grafiki z wyjściem w formacie MetaPost
 Name:		3DLDF
-Version:	1.1.5.1
+Version:	2.0.2
 Release:	1
 License:	GPL v2+
 Group:		Applications/Graphics
 Source0:	http://ftp.gnu.org/gnu/3dldf/%{name}-%{version}.tar.gz
-# Source0-md5:	abe73cec9db802c039c2399b87e2528b
+# Source0-md5:	d64642c4e24115909b214c9b06c542a6
 Patch0:		%{name}-info.patch
-URL:		http://wwwuser.gwdg.de/~lfinsto1/
+Patch1:		%{name}-bison.patch
+Patch2:		%{name}-texinfo.patch
+URL:		http://www.gnu.org/software/3dldf/
+# ps2pdf
+BuildRequires:	ghostscript
+BuildRequires:	gsl-devel
 BuildRequires:	libstdc++-devel
-BuildRequires:	tetex
+BuildRequires:	texlive
+BuildRequires:	texlive-fonts-type1-hoekwater
 BuildRequires:	texinfo
+BuildRequires:	texinfo-texi2dvi
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -28,9 +35,13 @@ w TeXu.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
-%configure
+# only 3dlfb binary uses libs, symbols are messed - no sense in building shared libs
+%configure \
+	--disable-shared
 %{__make}
 
 %install
@@ -39,17 +50,25 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+install -D doc/3dldf.info $RPM_BUILD_ROOT%{_infodir}/3dldf.info
+
+# headers not installed
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/lib3dldf*.{la,a}
+# too common name
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/dummy
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p	/sbin/postshell
+%post	-p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
-%postun	-p	/sbin/postshell
+%postun	-p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README DOC/TEXINFO/3DLDF.ps
-%attr(755,root,root) %{_bindir}/*
-%{_infodir}/*.info*
+%doc AUTHORS ChangeLog NEWS README
+%attr(755,root,root) %{_bindir}/3dldf
+%attr(755,root,root) %{_bindir}/prbsnflx
+%{_infodir}/3dldf.info*
