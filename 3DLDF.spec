@@ -42,7 +42,7 @@ w TeXu.
 # only 3dlfb binary uses libs, symbols are messed - no sense in building shared libs
 %configure \
 	--disable-shared
-%{__make}
+%{__make} -j1
 
 %install
 rm -rf $RPM_BUILD_ROOT
