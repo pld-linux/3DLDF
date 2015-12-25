@@ -2,7 +2,7 @@ Summary:	Three-dimensional drawing with MetaPost output
 Summary(pl.UTF-8):	Tworzenie trójwymiarowej grafiki z wyjściem w formacie MetaPost
 Name:		3DLDF
 Version:	2.0.3
-Release:	3
+Release:	4
 License:	GPL v2+
 Group:		Applications/Graphics
 Source0:	http://ftp.gnu.org/gnu/3dldf/%{name}-%{version}.tar.gz
