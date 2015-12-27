@@ -1,0 +1,34 @@
+Description: system: set second-largest-FP from std::numeric_limits
+ System::get_second_largest <(float|double)> is as transportable as
+ reinterpret_cast , that is, NOT. As suggested in gsltmplt.web ,
+ it is replaced with std::numeric_limits<(float|double)>::max() .
+Origin: debian
+Author: Jerome Benoit <calculus@rezozer.net>
+Last-Update: 2015-11-23
+
+--- a/src/main.web
++++ b/src/main.web
+@@ -1032,10 +1032,20 @@
+   @<Print version, copyright, and license information@>;
+ 
+   if (ldf_real_float)
+-    MAX_REAL = System::get_second_largest<float>(FLT_MAX, false);
++    MAX_REAL =
++#if 0
++			System::get_second_largest<float>(FLT_MAX, false);
++#else
++			std::numeric_limits<float>::max();
++#endif
+   else if (ldf_real_double)
+-    MAX_REAL = System::get_second_largest<double>(DBL_MAX, false);
+-  
++    MAX_REAL =
++#if 0
++			System::get_second_largest<double>(DBL_MAX, false);
++#else
++			std::numeric_limits<double>::max();
++#endif
++
+   MAX_REAL_SQRT = sqrt(MAX_REAL);
+ 
+   cerr.setf(ios::fixed, ios::floatfield);

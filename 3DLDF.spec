@@ -2,12 +2,16 @@ Summary:	Three-dimensional drawing with MetaPost output
 Summary(pl.UTF-8):	Tworzenie trójwymiarowej grafiki z wyjściem w formacie MetaPost
 Name:		3DLDF
 Version:	2.0.3
-Release:	4
+Release:	5
 License:	GPL v2+
 Group:		Applications/Graphics
 Source0:	http://ftp.gnu.org/gnu/3dldf/%{name}-%{version}.tar.gz
 # Source0-md5:	5e669f4efd3d576d42308ba61619a63f
 Patch0:		%{name}-info.patch
+Patch1:		upstream-cleanup-permissive_cxx_code.patch
+Patch2:		upstream-gcc-init_priority.patch
+Patch3:		upstream-sys-std_numeric_limits.patch
+Patch4:		upstream-w2help2man.patch
 URL:		http://www.gnu.org/software/3dldf/
 # ps2pdf
 BuildRequires:	ghostscript
@@ -33,6 +37,10 @@ w TeXu.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
 
 %build
 # only 3dlfb binary uses libs, symbols are messed - no sense in building shared libs

@@ -1,0 +1,300 @@
+Description: permissive code cleanup
+ Clarify C++ permissive code as detected by gcc-5; closes RC bug #777763.
+Origin: debian
+Forwarded: https://savannah.gnu.org/bugs/?44314
+Author: Jerome Benoit <calculus@rezozer.net>
+Last-Update: 2015-06-26
+
+--- a/src/pspglb.web
++++ b/src/pspglb.web
+@@ -5075,12 +5075,7 @@
+ void*
+ polyhedron_path_intersection_func(Polyhedron* p,
+                                   Path* q,
+-                                  void* parameter = 0);  
+-                      
+-template <class C>
+-int
+-show_func(C* c, string text = "", void* parameter = 0);
+-
++                                  void* parameter = 0);
+ 
+ void*
+ plane_intersection_func(void* v, void* w, void* parameter = 0);
+--- a/src/io.web
++++ b/src/io.web
+@@ -4937,22 +4937,22 @@
+    template <class C>
+    friend 
+    void*
+-   Scan_Parse::get_point_func(real r, C* c, void* parameter = 0);
++   Scan_Parse::get_point_func(real r, C* c, void* parameter);
+ 
+    template <class C>
+    friend
+    void*
+-   Scan_Parse::get_center_func(C* c, void* parameter = 0);
++   Scan_Parse::get_center_func(C* c, void* parameter);
+ 
+    template <class C>
+    friend
+    void*
+-   Scan_Parse::get_focus_func(C* c, const unsigned short s = 0, void* parameter = 0);
++   Scan_Parse::get_focus_func(C* c, const unsigned short s, void* parameter);
+ 
+    template <class C>
+    friend
+    void*
+-   Scan_Parse::get_vertex_func(C* c, const unsigned short s = 0, void* parameter = 0);
++   Scan_Parse::get_vertex_func(C* c, const unsigned short s, void* parameter);
+ 
+ 
+ @q **** (4) Functions for |Focuses|.@>   
+@@ -5009,8 +5009,8 @@
+    friend
+    string*
+    Scan_Parse::sub_binary_number_string_func(C c, 
+-                              bool oversize_switch = false,
+-                              Scanner_Node scanner_node = 0);
++                              bool oversize_switch,
++                              Scanner_Node scanner_node);
+ 
+ 
+ @q **** (4) @>   
+@@ -5035,7 +5035,7 @@
+        int 
+        Scan_Parse::shape_decl_func(Scanner_Node,
+                                    int,
+-                                   C* dummy = 0);
++                                   C*);
+ 
+    template <class C>
+      friend
+@@ -5164,7 +5164,7 @@
+ template <class C>
+ friend 
+ void*
+-Scan_Parse::normal_func(C* c, Scanner_Node scanner_node = 0);
++Scan_Parse::normal_func(C* c, Scanner_Node scanner_node);
+ 
+ 
+ @q **** (4)@> 
+@@ -5226,7 +5226,7 @@
+      Scan_Parse::vector_type_decl(Scanner_Node scanner_node,
+                                        int vector_type_num,
+                                        int array_type_num,
+-                                       C* dummy = 0);
++                                       C* dummy);
+ 
+ 
+      template <class C>
+@@ -5237,7 +5237,7 @@
+                                            int vector_type_num,
+                                            int array_type_num,
+                                            C* object,
+-                                           bool copy_object = true);
++                                           bool copy_object);
+ 
+      template <class C, class D>
+      friend
+@@ -5245,7 +5245,7 @@
+      Scan_Parse::vector_type_assign(Scanner_Node scanner_node,
+                                     Id_Map_Entry_Node entry,
+                                     const Pointer_Vector<D>* object_vector,
+-                                    C* dummy = 0);
++                                    C* dummy);
+      friend
+      int 
+      Scan_Parse::conditional(Scanner_Node scanner_node,
+@@ -5367,7 +5367,7 @@
+      template<class C>
+      friend 
+      int
+-     Scan_Parse::reverse_func(void* v, void* parameter, C* c = 0);
++     Scan_Parse::reverse_func(void* v, void* parameter, C* c);
+ 
+ 
+      friend 
+@@ -5447,7 +5447,7 @@
+ template<class C>
+ friend 
+ void*
+-standardize_func(C* c, void* v = 0);
++standardize_func(C* c, void* v);
+ 
+ friend
+ void*
+@@ -5610,11 +5610,11 @@
+                                    int increment_value,
+                                    const unsigned short conic_section_type,
+                                    C* c, 
+-                                   void* parameter = 0,
+-                                   bool test_points = true,
+-                                   bool rectify_points = true,
+-                                   real tolerance = -1,
+-                                   bool ignore_extra_points = true);
++                                   void* parameter,
++                                   bool test_points,
++                                   bool rectify_points,
++                                   real tolerance,
++                                   bool ignore_extra_points);
+ 
+ friend 
+ void* 
+@@ -5677,23 +5677,23 @@
+ template<class C>
+ friend 
+ int
+-Scan_Parse::cull_func(void* v, 
+-                      const unsigned short comparison = 0,
+-                      Scanner_Node scanner_node = 0, 
+-                      real tolerance = -1,
+-                      C* c = 0);
++Scan_Parse::cull_func(void* v,
++                      const unsigned short comparison,
++                      Scanner_Node scanner_node,
++                      real tolerance,
++                      C* c);
+ 
+ template<class C>
+ friend
+ int 
+ Scan_Parse::rectify_func(void* v,
+-                         Scanner_Node scanner_node = 0,
+-                         bool do_test = true,
+-                         bool do_cull = true,
+-                         bool do_transform = true,
+-                         real tolerance = -1,
+-                         Transform* t = 0,
+-                         C* c = 0);
++                         Scanner_Node scanner_node,
++                         bool do_test,
++                         bool do_cull,
++                         bool do_transform,
++                         real tolerance,
++                         Transform* t,
++                         C* c);
+ 
+ @q ***** (5) |cuboid| expressions.@>  
+ @*4 {\bf cuboid} expressions.
+@@ -5709,12 +5709,12 @@
+ template<class C>
+ friend 
+ void*
+-Scan_Parse::in_cuboid_func(C* c, void* parameter = 0);
++Scan_Parse::in_cuboid_func(C* c, void* parameter);
+ 
+ template<class C>
+ friend 
+ void*
+-Scan_Parse::out_cuboid_func(C* c, void* parameter = 0);
++Scan_Parse::out_cuboid_func(C* c, void* parameter);
+ 
+ @q ***** (5) Functions for |Polyhedra|.@>   
+ @*4 Functions for {\bf Polyhedra}.
+@@ -6033,7 +6033,7 @@
+ template<class C>
+ friend
+ void*
+-Scan_Parse::is_whatever_func(C* c, void* parameter = 0);
++Scan_Parse::is_whatever_func(C* c, void* parameter);
+ 
+ 
+ friend
+@@ -6047,10 +6047,10 @@
+ template <class C, class D, class E>
+ friend
+ void*
+-Scan_Parse::intersection_points_func(C* c, 
+-                                     D* d, 
+-                                     void* parameter = 0, 
+-                                     E* e = 0);
++Scan_Parse::intersection_points_func(C* c,
++                                     D* d,
++                                     void* parameter,
++                                     E* e);
+ friend
+ Pointer_Vector<Bool_Point>*
+ Scan_Parse::convert(Bool_Point_Quadruple* bpq, 
+@@ -6061,22 +6061,22 @@
+ template<class C, class D>
+ friend
+ void*
+-Scan_Parse::ellipse_like_intersection_func(C* c, D* d, void* parameter = 0);
++Scan_Parse::ellipse_like_intersection_func(C* c, D* d, void* parameter);
+ 
+ template<class C>
+ friend 
+ void*
+-Scan_Parse::ellipse_like_plane_intersection_func(C* c, void* w, void* parameter = 0);
++Scan_Parse::ellipse_like_plane_intersection_func(C* c, void* w, void* parameter);
+ 
+ template<class C, class D>
+ friend 
+ void*
+-Scan_Parse::conic_section_intersection_func(C* c, D* d, void* parameter = 0);
++Scan_Parse::conic_section_intersection_func(C* c, D* d, void* parameter);
+ 
+ template<class C, class D>
+ friend
+ void*
+-Scan_Parse::polygon_like_intersection_func(C* c, D* d, void* parameter = 0);
++Scan_Parse::polygon_like_intersection_func(C* c, D* d, void* parameter);
+ 
+ 
+ template<class C>
+@@ -6084,7 +6084,7 @@
+ void*
+ Scan_Parse::ellipsoid_like_plane_intersection_func(C* c,
+                                                    Plane* p,
+-                                                   void* parameter = 0);
++                                                   void* parameter);
+ friend 
+ void*
+ Scan_Parse::sphere_line_intersection_func(Sphere* s,
+@@ -6100,12 +6100,12 @@
+ template<class C>
+ friend 
+ void*
+-Scan_Parse::plane_cast_func(C* c, void* parameter = 0); 
++Scan_Parse::plane_cast_func(C* c, void* parameter);
+ 
+ template <class C>
+ friend 
+ void*
+-Scan_Parse::plane_assignment_func(void* entry, C* c, void* parameter = 0);
++Scan_Parse::plane_assignment_func(void* entry, C* c, void* parameter);
+ 
+ friend 
+ int
+@@ -6114,7 +6114,7 @@
+ template <class C>
+ friend 
+ int
+-Scan_Parse::show_func(C* c, string text = "", void* parameter = 0);
++Scan_Parse::show_func(C* c, string text, void* parameter);
+ 
+ friend
+ void*
+--- a/src/scanprse.web
++++ b/src/scanprse.web
+@@ -6245,7 +6245,7 @@
+ Scan_Parse::vector_type_decl(Scanner_Node scanner_node,
+                              int vector_type_num,
+                              int array_type_num,
+-                             C* dummy = 0)
++                             C* dummy)
+ {
+ 
+ 
+@@ -8147,8 +8147,8 @@
+ Scan_Parse::cull_func(void* v, 
+                       const unsigned short comparison,
+                       Scanner_Node scanner_node, 
+-                      real tolerance = -1,
+-                      C* c = 0)
++                      real tolerance,
++                      C* c)
+ {
+ 
+ @q ***** (5) Preliminaries.@>   

@@ -1,0 +1,80 @@
+Description: random pre-main initialization: prioritize
+ Clarify C++ pre-main initialization with the help of the gcc specific
+ attribute init_priority; closes RC bug #759696.
+Origin: debian
+Author: Jerome Benoit <calculus@rezozer.net>
+Last-Update: 2015-11-23
+
+--- a/src/points.web
++++ b/src/points.web
+@@ -704,18 +704,16 @@
+ 
+ @<Global constants@>=
+ 
+-extern const Point INVALID_POINT(INVALID_REAL, INVALID_REAL, INVALID_REAL);
+-extern const Point ORIGIN(0, 0, 0);
+-extern const Point_Pair INVALID_POINT_PAIR(INVALID_POINT, INVALID_POINT);
++extern const Point __attribute__((init_priority(500))) INVALID_POINT(INVALID_REAL, INVALID_REAL, INVALID_REAL);
++extern const Point __attribute__((init_priority(500))) ORIGIN(0, 0, 0);
++extern const Point_Pair __attribute__((init_priority(1000))) INVALID_POINT_PAIR(INVALID_POINT, INVALID_POINT);
+ 
+-extern const Bool_Point INVALID_BOOL_POINT(false, INVALID_POINT);
+-extern const Bool_Point_Pair INVALID_BOOL_POINT_PAIR(INVALID_BOOL_POINT,
+-                                       INVALID_BOOL_POINT); 
++extern const Bool_Point __attribute__((init_priority(1000))) INVALID_BOOL_POINT(false, INVALID_POINT);
++extern const Bool_Point_Pair __attribute__((init_priority(2000))) INVALID_BOOL_POINT_PAIR(INVALID_BOOL_POINT, INVALID_BOOL_POINT);
+ 
+ 
+-extern const Bool_Real_Point INVALID_BOOL_REAL_POINT(false, INVALID_REAL,
+-                                       INVALID_POINT);
+-extern const Bool_Point_Quadruple
++extern const Bool_Real_Point __attribute__((init_priority(1000))) INVALID_BOOL_REAL_POINT(false, INVALID_REAL, INVALID_POINT);
++extern const Bool_Point_Quadruple __attribute__((init_priority(2000)))
+    INVALID_BOOL_POINT_QUADRUPLE(INVALID_BOOL_POINT,
+                                 INVALID_BOOL_POINT,
+                                 INVALID_BOOL_POINT,
+--- a/src/lines.web
++++ b/src/lines.web
+@@ -1032,7 +1032,7 @@
+ @q * Global constants for Line.@>
+ @ Global constants for {\bf Line}.
+ @<|Line| global constants@>=
+-extern const Line INVALID_LINE(INVALID_POINT, INVALID_POINT);
++extern const Line __attribute__((init_priority(1000))) INVALID_LINE(INVALID_POINT, INVALID_POINT);
+ 
+ @
+ @<Declarations for the header file@>=
+--- a/src/planes.web
++++ b/src/planes.web
+@@ -1617,8 +1617,7 @@
+ @q * (1) Global constants for Plane.@>
+ @* Global constants for {\bf Plane}.
+ @<|Plane| global constants@>=
+-extern const Plane INVALID_PLANE(INVALID_POINT,
+-                                 INVALID_POINT);
++extern const Plane __attribute__((init_priority(1000))) INVALID_PLANE(INVALID_POINT, INVALID_POINT);
+ 
+ @
+ @<Declarations for the header file@>=
+--- a/src/complex.web
++++ b/src/complex.web
+@@ -143,7 +143,7 @@
+ 
+ @<Global constants@>=
+ 
+-extern const Complex INVALID_COMPLEX(INVALID_REAL, INVALID_REAL);
++extern const Complex __attribute__((init_priority(500))) INVALID_COMPLEX(INVALID_REAL, INVALID_REAL);
+ 
+ @q *** (3)@>
+ @
+--- a/src/transfor.web
++++ b/src/transfor.web
+@@ -1517,7 +1517,7 @@
+ @q * Global constants. @>
+ @ Global constants.
+ @<Global constants@>=
+-extern const Transform INVALID_TRANSFORM(INVALID_REAL);
++extern const Transform __attribute__((init_priority(500))) INVALID_TRANSFORM(INVALID_REAL);
+ extern const Transform IDENTITY_TRANSFORM;
+ 
+ @
