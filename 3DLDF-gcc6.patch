@@ -1,0 +1,29 @@
+--- 3DLDF-2.0.3/src/pcondit.w.orig	2013-11-11 19:43:06.000000000 +0100
++++ 3DLDF-2.0.3/src/pcondit.w	2017-06-26 17:20:52.038628531 +0200
+@@ -180,7 +180,7 @@
+  
+     int i = (*b) ? 1 : 0;
+ 
+-    int status = conditional(scanner_node, i); 
++    int status = Scan_Parse::conditional(scanner_node, i); 
+ 
+   
+ @q ****** (6) Error handling: |status != 0|.@> 
+@@ -244,7 +244,7 @@
+ 
+     int discard = 2;
+ 
+-    int status = conditional(static_cast<Scanner_Node>(parameter), discard);
++    int status = Scan_Parse::conditional(static_cast<Scanner_Node>(parameter), discard);
+ 
+ @q ****** (6) Error handling: |status != 0|.@> 
+ 
+@@ -303,7 +303,7 @@
+ 
+   int discard = 2;
+ 
+-  int status = conditional(static_cast<Scanner_Node>(parameter), discard);
++  int status = Scan_Parse::conditional(static_cast<Scanner_Node>(parameter), discard);
+ 
+ @q ****** (6) Error handling: |status != 0|.@> 
+ 
